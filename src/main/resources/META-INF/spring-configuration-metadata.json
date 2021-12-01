@@ -1,0 +1,52 @@
+{
+	"groups": [
+		{
+			"name": "resource.event",
+			"type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+			"sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+		},
+		{
+			"name": "resource.speaker",
+			"type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+			"sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+		}
+	],
+	"properties": [
+		{
+			"name": "resource.event.protocol",
+			"type": "java.lang.String",
+			"description": "event resource container's protocol.",
+			"sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+		},
+		{
+			"name": "resource.event.host",
+			"type": "java.lang.String",
+			"description": "event resource container's host.",
+			"sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+		},
+		{
+			"name": "resource.event.port",
+			"type": "java.lang.String",
+			"description": "event resource container's port.",
+			"sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+		},
+		{
+			"name": "resource.speaker.protocol",
+			"type": "java.lang.String",
+			"description": "speaker resource container's protocol.",
+			"sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+		},
+		{
+			"name": "resource.speaker.host",
+			"type": "java.lang.String",
+			"description": "speaker resource container's host.",
+			"sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+		},
+		{
+			"name": "resource.speaker.port",
+			"type": "java.lang.String",
+			"description": "speaker resource container's port.",
+			"sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+		}
+	]
+}
