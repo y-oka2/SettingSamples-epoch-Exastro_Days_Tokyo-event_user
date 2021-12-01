@@ -8,12 +8,12 @@
 		<version>2.6.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>exastro.KY_CloudSummit</groupId>
+	<groupId>exastro.Exastro_Days_Tokyo</groupId>
 	<artifactId>event_user</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>event_user</name>
-	<description>event service for user in KY_CloudSummit</description>
+	<description>event service for user in Exastro_Days_Tokyo</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
