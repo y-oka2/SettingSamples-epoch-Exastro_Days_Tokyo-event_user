@@ -36,7 +36,7 @@ public class EventRepository extends BaseRepository {
 	
 	public List<EventVO> getEvent() {
 		
-		String apiPath = "/api/vi/event";
+		String apiPath = "/api/v1/event";
 		String apiUrl = buildBaseUri() + apiPath;
 		
 		EventVO[] resBody = null;
