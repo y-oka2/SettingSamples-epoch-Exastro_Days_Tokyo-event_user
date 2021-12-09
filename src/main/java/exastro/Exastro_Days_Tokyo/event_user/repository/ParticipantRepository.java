@@ -21,17 +21,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import exastro.Exastro_Days_Tokyo.event_user.repository.vo.SpeakerVO;
+import exastro.Exastro_Days_Tokyo.event_user.repository.vo.ParticipantVO;
 
-@ConfigurationProperties(prefix = "resource.speaker")
+@ConfigurationProperties(prefix = "resource.participant")
 @Repository
-public class SpeakerRepository extends BaseRepository {
+public class ParticipantRepository extends BaseRepository {
 	
-	public SpeakerRepository(RestTemplate restTemplate) {
+	public ParticipantRepository(RestTemplate restTemplate) {
 		super(restTemplate);
 	}
 
-	public List<SpeakerVO> getSpeaker() {
+	public List<ParticipantVO> getParticipant() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

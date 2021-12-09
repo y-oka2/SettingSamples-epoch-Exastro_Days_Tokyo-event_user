@@ -15,23 +15,26 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.repository.vo;
 
-public class SpeakerVO {
-
-	private int speakerId;
-	private String speakerName;
-
-	public int getspeakerId() {
-		return speakerId;
-	}
-	public void setspeakerId(int speakerId) {
-		this.speakerId = speakerId;
+public class ParticipantVO {
+	
+	private int participantId;
+	private String userName;
+	
+	public ParticipantVO() {
+		
 	}
 	
-	public String getspeakerName() {
-		return speakerName;
+	public int getParticipantId() {
+		return participantId;
 	}
-	public void setspeakerName(String speakerName) {
-		this.speakerName = speakerName;
+	public void setParticipantId(int participantId) {
+		this.participantId = participantId;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }
-

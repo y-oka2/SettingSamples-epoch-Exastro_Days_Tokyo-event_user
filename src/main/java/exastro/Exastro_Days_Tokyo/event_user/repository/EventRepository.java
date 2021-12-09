@@ -35,16 +35,21 @@ public class EventRepository extends BaseRepository {
 	}
 	
 	public List<EventVO> getEvent() {
+
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		
 		String apiPath = "/api/v1/event";
 		String apiUrl = buildBaseUri() + apiPath;
 		
 		EventVO[] resBody = null;
 		try {
+			
+			logger.debug("restTemplate.getForEntity [apiUrl: " + apiUrl + "]");
 			ResponseEntity<EventVO[]> response = restTemplate.getForEntity(apiUrl, EventVO[].class);
 			resBody = response.getBody();
 		}
 		catch(Exception e) {
+			logger.debug(e.getMessage(), e);
 			throw e;
 		}
 		

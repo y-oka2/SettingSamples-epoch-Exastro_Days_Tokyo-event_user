@@ -18,6 +18,8 @@ package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,8 @@ import exastro.Exastro_Days_Tokyo.event_user.service.EventService;
 @RequestMapping("/api/v1/event")
 public class BaseEventController {
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	protected EventService service;
 	
@@ -39,6 +43,8 @@ public class BaseEventController {
 	
 	@GetMapping("")
 	public List<EventForm> event() {
+
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		
 		List<EventForm> eventList = null;
 		

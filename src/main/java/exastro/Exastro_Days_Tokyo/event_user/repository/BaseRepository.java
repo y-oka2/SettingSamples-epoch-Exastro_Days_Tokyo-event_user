@@ -15,9 +15,13 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
 public abstract class BaseRepository {
+
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	protected final RestTemplate restTemplate;
 	

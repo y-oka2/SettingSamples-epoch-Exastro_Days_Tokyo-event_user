@@ -18,25 +18,31 @@ package exastro.Exastro_Days_Tokyo.event_user.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import exastro.Exastro_Days_Tokyo.event_user.repository.EventRepository;
-import exastro.Exastro_Days_Tokyo.event_user.repository.SpeakerRepository;
+import exastro.Exastro_Days_Tokyo.event_user.repository.ParticipantRepository;
 import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDto;
 
 public abstract class BaseEventService {
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	protected EventRepository event_repo;
 
 	@Autowired
-	protected SpeakerRepository speaker_repo;
+	protected ParticipantRepository participant_repo;
 	
 	public BaseEventService() {
 		
 	}
 
 	public List<EventDto> getEvent() {
+
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		
 		List<EventDto> eventList = null;
 		
