@@ -15,19 +15,19 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class EventForm {
 
 	private int eventId;
 	private String eventName;
-	private Date eventDate;
+	private Timestamp eventDate;
 
 	public EventForm() {
 		
 	}
 
-	public EventForm(int eventId, String eventName, Date eventDate) {
+	public EventForm(int eventId, String eventName, Timestamp eventDate) {
 		this.eventId = eventId;
 		this.eventName = eventName;
 		this.eventDate = eventDate;
@@ -47,10 +47,10 @@ public class EventForm {
 		this.eventName = eventName;
 	}
 	
-	public Date getEventDate() {
+	public Timestamp getEventDate() {
 		return eventDate;
 	}
-	public void setEventDate(Date eventDate) {
+	public void setEventDate(Timestamp eventDate) {
 		this.eventDate = eventDate;
 	}
 }

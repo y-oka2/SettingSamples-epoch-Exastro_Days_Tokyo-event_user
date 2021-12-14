@@ -15,16 +15,33 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.repository.vo;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventDetailVO {
 
 	private int eventId;
 	private String eventName;
 	private String eventOverview;
-	private Date eventDate;
+	private Timestamp eventDate;
 	private String eventVenue;
-	private boolean isDeleted;
+	private boolean deleteFlag;
+	private List<Integer> speakerIDs;
+
+	public EventDetailVO() {
+		
+	}
+
+	public EventDetailVO(int eventId, String eventName, 
+			String eventOverview, Timestamp eventDate, String eventVenue, List<Integer> speakerIDs) {
+		this.eventId = eventId;
+		this.eventName = eventName;
+		this.eventOverview = eventOverview;
+		this.eventDate = eventDate;
+		this.eventVenue = eventVenue;
+		this.speakerIDs = new ArrayList<Integer>(speakerIDs);
+	}
 
 	public int getEventId() {
 		return eventId;
@@ -47,10 +64,10 @@ public class EventDetailVO {
 		this.eventOverview = eventOverview;
 	}
 	
-	public Date getEventDate() {
+	public Timestamp getEventDate() {
 		return eventDate;
 	}
-	public void setEventDate(Date eventDate) {
+	public void setEventDate(Timestamp eventDate) {
 		this.eventDate = eventDate;
 	}
 	
@@ -61,11 +78,18 @@ public class EventDetailVO {
 		this.eventVenue = eventVenue;
 	}
 	
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean getDeleteFlag() {
+		return deleteFlag;
 	}
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setDeleteFlag(boolean deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+
+	public List<Integer> getSpeakerIDs() {
+		return speakerIDs;
+	}
+	public void setSpeakerIDs(List<Integer> speakerIDs) {
+		this.speakerIDs = speakerIDs;
 	}
 }
 

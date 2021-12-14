@@ -15,7 +15,7 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.repository.vo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,10 +24,16 @@ public class EventVO {
 
 	private int eventId;
 	private String eventName;
-	private Date eventDate;
+	private Timestamp eventDate;
 
 	public EventVO() {
 		
+	}
+
+	public EventVO(int eventId, String eventName,Timestamp eventDate) {
+		this.eventId = eventId;
+		this.eventName = eventName;
+		this.eventDate = eventDate;
 	}
 	
 	public int getEventId() {
@@ -44,10 +50,10 @@ public class EventVO {
 		this.eventName = eventName;
 	}
 	
-	public Date getEventDate() {
+	public Timestamp getEventDate() {
 		return eventDate;
 	}
-	public void setEventDate(Date eventDate) {
+	public void setEventDate(Timestamp eventDate) {
 		this.eventDate = eventDate;
 	}
 }

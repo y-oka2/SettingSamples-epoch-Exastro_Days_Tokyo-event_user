@@ -15,16 +15,18 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.List;
 
 public class EventDetailForm {
 
 	private int eventId;
 	private String eventName;
 	private String eventOverview;
-	private Date eventDate;
+	private Timestamp eventDate;
 	private String eventVenue;
-	private boolean isDeleted;
+	private boolean deleteFlag;
+	private List<Integer> speakerIDs;
 
 	public int getEventId() {
 		return eventId;
@@ -47,10 +49,10 @@ public class EventDetailForm {
 		this.eventOverview = eventOverview;
 	}
 	
-	public Date getEventDate() {
+	public Timestamp getEventDate() {
 		return eventDate;
 	}
-	public void setEventDate(Date eventDate) {
+	public void setEventDate(Timestamp eventDate) {
 		this.eventDate = eventDate;
 	}
 	
@@ -61,11 +63,18 @@ public class EventDetailForm {
 		this.eventVenue = eventVenue;
 	}
 	
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean getDeleteFlag() {
+		return deleteFlag;
 	}
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setDeleteFlag(boolean deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+
+	public List<Integer> getSpeakerIDs() {
+		return speakerIDs;
+	}
+	public void setSpeakerIDs(List<Integer> speakerIDs) {
+		this.speakerIDs = speakerIDs;
 	}
 }
 

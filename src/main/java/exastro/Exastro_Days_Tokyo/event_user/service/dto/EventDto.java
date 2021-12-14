@@ -15,19 +15,19 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.service.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class EventDto {
 
 	private int eventId;
 	private String eventName;
-	private Date eventDate;
+	private Timestamp eventDate;
 
 	public EventDto() {
 		
 	}
 
-	public EventDto(int eventId, String eventName, Date eventDate) {
+	public EventDto(int eventId, String eventName, Timestamp eventDate) {
 		this.eventId = eventId;
 		this.eventName = eventName;
 		this.eventDate = eventDate;
@@ -47,10 +47,10 @@ public class EventDto {
 		this.eventName = eventName;
 	}
 	
-	public Date getEventDate() {
+	public Timestamp getEventDate() {
 		return eventDate;
 	}
-	public void setEventDate(Date eventDate) {
+	public void setEventDate(Timestamp eventDate) {
 		this.eventDate = eventDate;
 	}
 }
