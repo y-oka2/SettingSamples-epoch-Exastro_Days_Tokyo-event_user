@@ -20,14 +20,23 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EventForm {
+import lombok.Getter;
+import lombok.Setter;
 
+public class EventForm {
+	
+	@Getter
+	@Setter
 	@JsonProperty("event_id")
 	private int eventId;
 	
+	@Getter
+	@Setter
 	@JsonProperty("event_name")
 	private String eventName;
 	
+	@Getter
+	@Setter
 	@JsonProperty("event_date")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Tokyo") // 起動オプションでTimeZone変える？
 	private Date eventDate;
@@ -41,26 +50,4 @@ public class EventForm {
 		this.eventName = eventName;
 		this.eventDate = eventDate;
 	}
-	
-	public int getEventId() {
-		return eventId;
-	}
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
-	}
-	
-	public String getEventName() {
-		return eventName;
-	}
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
-	}
-	
-	public Date getEventDate() {
-		return eventDate;
-	}
-	public void setEventDate(Date eventDate) {
-		this.eventDate = eventDate;
-	}
 }
-

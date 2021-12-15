@@ -19,24 +19,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
-public abstract class BaseRepository {
+import exastro.Exastro_Days_Tokyo.event_user.repository.config.ConnectionConfig;
 
+public abstract class BaseRepository {
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	protected final RestTemplate restTemplate;
+	protected RestTemplate restTemplate;
 	
-	protected String protocol;
-	protected String host;
-	protected String port;
-	
-	protected BaseRepository(RestTemplate restTemplate) {
-		this.restTemplate = restTemplate;
-	}
-	
-	protected String buildBaseUri() {
-		
-		String baseUri = String.format("%s://%s:%s", this.protocol, this.host, this.port);
-		return baseUri;
-	}
+	protected ConnectionConfig connectionConfig;
 
 }

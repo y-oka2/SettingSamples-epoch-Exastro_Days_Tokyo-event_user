@@ -15,11 +15,14 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.config;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.client.RestTemplate;
+
+import exastro.Exastro_Days_Tokyo.event_user.repository.config.ConnectionConfig;
 
 @Configuration
 public class AppConfig {
@@ -36,4 +39,16 @@ public class AppConfig {
 	  config.setIgnoreUnresolvablePlaceholders(true);
 	  return config;
 	}
+
+    @Bean
+    @ConfigurationProperties(prefix = "resource.event")
+    public ConnectionConfig configEvent() {
+        return new ConnectionConfig();
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "resource.participant")
+    public ConnectionConfig configParticipant() {
+        return new ConnectionConfig();
+    }
 }

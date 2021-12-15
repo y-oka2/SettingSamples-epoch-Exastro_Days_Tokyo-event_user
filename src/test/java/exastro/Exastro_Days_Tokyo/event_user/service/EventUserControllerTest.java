@@ -27,12 +27,10 @@ import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDto;
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(EventUserController.class)
-//@ContextConfiguration(classes = {EventUserController.class})
 public class EventUserControllerTest {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-//	@Autowired
 	MockMvc mockMvc;
 	
 	@Mock   // モックオブジェクトとして使用することを宣言

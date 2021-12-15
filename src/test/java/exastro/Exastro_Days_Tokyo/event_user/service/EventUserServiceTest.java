@@ -17,7 +17,6 @@ import exastro.Exastro_Days_Tokyo.event_user.repository.EventRepository;
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.EventVO;
 import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDto;
 
-//@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 @ExtendWith(MockitoExtension.class)
 public class EventUserServiceTest {
 	

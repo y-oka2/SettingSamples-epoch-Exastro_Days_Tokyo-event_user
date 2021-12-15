@@ -19,17 +19,12 @@ import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.client.RestTemplate;
 
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.ParticipantVO;
 
 @ConfigurationProperties(prefix = "resource.participant")
 @Repository
 public class ParticipantRepository extends BaseRepository {
-	
-	public ParticipantRepository(RestTemplate restTemplate) {
-		super(restTemplate);
-	}
 
 	public List<ParticipantVO> getParticipant() {
 		// TODO 自動生成されたメソッド・スタブ

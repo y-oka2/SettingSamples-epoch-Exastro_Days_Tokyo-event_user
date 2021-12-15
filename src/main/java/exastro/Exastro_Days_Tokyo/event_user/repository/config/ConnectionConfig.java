@@ -13,41 +13,29 @@
  *   limitations under the License.
  */
 
-package exastro.Exastro_Days_Tokyo.event_user.service.dto;
-
-import java.util.Date;
-import java.util.List;
+package exastro.Exastro_Days_Tokyo.event_user.repository.config;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class EventDetailDto {
+public class ConnectionConfig {
 	
 	@Getter
 	@Setter
-	private int eventId;
+	private String protocol;
 	
 	@Getter
 	@Setter
-	private String eventName;
+	private String host;
 	
 	@Getter
 	@Setter
-	private String eventOverview;
+	private String port;
 	
-	@Getter
-	@Setter
-	private Date eventDate;
+	public String buildBaseUri() {
+		
+		String baseUri = String.format("%s://%s:%s", this.protocol, this.host, this.port);
+		return baseUri;
+	}
 	
-	@Getter
-	@Setter
-	private String eventVenue;
-	
-	@Getter
-	@Setter
-	private boolean deleteFlag;
-	
-	@Getter
-	@Setter
-	private List<Integer> speakerIDs;
 }

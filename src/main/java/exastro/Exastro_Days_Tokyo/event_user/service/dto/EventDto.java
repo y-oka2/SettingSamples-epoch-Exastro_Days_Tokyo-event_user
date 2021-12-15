@@ -17,10 +17,21 @@ package exastro.Exastro_Days_Tokyo.event_user.service.dto;
 
 import java.util.Date;
 
-public class EventDto {
+import lombok.Getter;
+import lombok.Setter;
 
+public class EventDto {
+	
+	@Getter
+	@Setter
 	private int eventId;
+	
+	@Getter
+	@Setter
 	private String eventName;
+	
+	@Getter
+	@Setter
 	private Date eventDate;
 
 	public EventDto() {
@@ -32,26 +43,4 @@ public class EventDto {
 		this.eventName = eventName;
 		this.eventDate = eventDate;
 	}
-
-	public int getEventId() {
-		return eventId;
-	}
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
-	}
-	
-	public String getEventName() {
-		return eventName;
-	}
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
-	}
-	
-	public Date getEventDate() {
-		return eventDate;
-	}
-	public void setEventDate(Date eventDate) {
-		this.eventDate = eventDate;
-	}
 }
-

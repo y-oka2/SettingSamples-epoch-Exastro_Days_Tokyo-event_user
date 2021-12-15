@@ -18,42 +18,61 @@ package exastro.Exastro_Days_Tokyo.event_user.repository;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import exastro.Exastro_Days_Tokyo.event_user.repository.config.ConnectionConfig;
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.EventDetailVO;
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.EventVO;
 
-@ConfigurationProperties(prefix = "resource.event")
 @Repository
 public class EventRepository extends BaseRepository {
 	
-	public EventRepository(RestTemplate restTemplate) {
-		super(restTemplate);
+	@Autowired
+	public EventRepository(@Qualifier("configEvent") ConnectionConfig connectionConfig,
+			RestTemplate restTemplate) {
+		this.connectionConfig = connectionConfig;
+		this.restTemplate = restTemplate;
 	}
 	
 	public List<EventVO> getEvent() {
-
+		
 		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		
 		String apiPath = "/api/v1/event";
-		String apiUrl = buildBaseUri() + apiPath;
+		String apiUrl = connectionConfig.buildBaseUri() + apiPath;
 		
 		EventVO[] resBody = null;
 		try {
 			
 			logger.debug("restTemplate.getForEntity [apiUrl: " + apiUrl + "]");
 			ResponseEntity<EventVO[]> response = restTemplate.getForEntity(apiUrl, EventVO[].class);
+			
+			if(response == null) {
+				logger.debug("null");
+				return null;
+			}
+			if(response.getStatusCode() != HttpStatus.OK) {
+				logger.debug("not 200");
+				return null;
+			}
+			if(!response.hasBody()) {
+				logger.debug("no data");
+				return null;
+			}
 			resBody = response.getBody();
+			return Arrays.asList(resBody);
 		}
 		catch(Exception e) {
 			logger.debug(e.getMessage(), e);
 			throw e;
 		}
 		
-		return Arrays.asList(resBody);
+		
 	}
 	
 	public EventDetailVO getEventDetail(int eventId) {

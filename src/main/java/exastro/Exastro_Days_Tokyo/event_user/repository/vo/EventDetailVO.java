@@ -19,14 +19,37 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class EventDetailVO {
+import lombok.Getter;
+import lombok.Setter;
 
+public class EventDetailVO {
+	
+	@Getter
+	@Setter
 	private int eventId;
+	
+	@Getter
+	@Setter
 	private String eventName;
+	
+	@Getter
+	@Setter
 	private String eventOverview;
+	
+	@Getter
+	@Setter
 	private Date eventDate;
+	
+	@Getter
+	@Setter
 	private String eventVenue;
+	
+	@Getter
+	@Setter
 	private boolean deleteFlag;
+	
+	@Getter
+	@Setter
 	private List<Integer> speakerIDs;
 
 	public EventDetailVO() {
@@ -42,54 +65,4 @@ public class EventDetailVO {
 		this.eventVenue = eventVenue;
 		this.speakerIDs = new ArrayList<Integer>(speakerIDs);
 	}
-
-	public int getEventId() {
-		return eventId;
-	}
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
-	}
-	
-	public String getEventName() {
-		return eventName;
-	}
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
-	}
-	
-	public String getEventOverview() {
-		return eventOverview;
-	}
-	public void setEventOverview(String eventOverview) {
-		this.eventOverview = eventOverview;
-	}
-	
-	public Date getEventDate() {
-		return eventDate;
-	}
-	public void setEventDate(Date eventDate) {
-		this.eventDate = eventDate;
-	}
-	
-	public String getEventVenue() {
-		return eventVenue;
-	}
-	public void setEventVenue(String eventVenue) {
-		this.eventVenue = eventVenue;
-	}
-	
-	public boolean getDeleteFlag() {
-		return deleteFlag;
-	}
-	public void setDeleteFlag(boolean deleteFlag) {
-		this.deleteFlag = deleteFlag;
-	}
-
-	public List<Integer> getSpeakerIDs() {
-		return speakerIDs;
-	}
-	public void setSpeakerIDs(List<Integer> speakerIDs) {
-		this.speakerIDs = speakerIDs;
-	}
 }
-
