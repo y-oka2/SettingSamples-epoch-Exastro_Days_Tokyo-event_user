@@ -15,8 +15,8 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.repository.vo;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EventDetailVO {
@@ -24,7 +24,7 @@ public class EventDetailVO {
 	private int eventId;
 	private String eventName;
 	private String eventOverview;
-	private Timestamp eventDate;
+	private Date eventDate;
 	private String eventVenue;
 	private boolean deleteFlag;
 	private List<Integer> speakerIDs;
@@ -34,7 +34,7 @@ public class EventDetailVO {
 	}
 
 	public EventDetailVO(int eventId, String eventName, 
-			String eventOverview, Timestamp eventDate, String eventVenue, List<Integer> speakerIDs) {
+			String eventOverview, Date eventDate, String eventVenue, List<Integer> speakerIDs) {
 		this.eventId = eventId;
 		this.eventName = eventName;
 		this.eventOverview = eventOverview;
@@ -64,10 +64,10 @@ public class EventDetailVO {
 		this.eventOverview = eventOverview;
 	}
 	
-	public Timestamp getEventDate() {
+	public Date getEventDate() {
 		return eventDate;
 	}
-	public void setEventDate(Timestamp eventDate) {
+	public void setEventDate(Date eventDate) {
 		this.eventDate = eventDate;
 	}
 	
