@@ -1,4 +1,4 @@
-package exastro.Exastro_Days_Tokyo.event_user.service;
+package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.EventUserController;
+import exastro.Exastro_Days_Tokyo.event_user.service.EventService;
 import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDto;
 
 @ExtendWith(MockitoExtension.class)

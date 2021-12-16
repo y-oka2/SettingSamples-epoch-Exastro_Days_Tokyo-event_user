@@ -1,4 +1,4 @@
-package exastro.Exastro_Days_Tokyo.event_user.service;
+package exastro.Exastro_Days_Tokyo.event_user.repository;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
@@ -18,7 +18,6 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import exastro.Exastro_Days_Tokyo.event_user.repository.EventRepository;
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.EventVO;
 
 @SpringBootTest
