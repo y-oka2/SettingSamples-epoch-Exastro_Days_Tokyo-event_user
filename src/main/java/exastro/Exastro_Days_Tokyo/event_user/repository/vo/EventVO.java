@@ -17,7 +17,9 @@ package exastro.Exastro_Days_Tokyo.event_user.repository.vo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,14 +29,18 @@ public class EventVO {
 	
 	@Getter
 	@Setter
+	@JsonProperty("event_id")
 	private int eventId;
 	
 	@Getter
 	@Setter
+	@JsonProperty("event_name")
 	private String eventName;
 	
 	@Getter
 	@Setter
+	@JsonProperty("event_date")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Tokyo") // 起動オプションでTimeZone変える？
 	private Date eventDate;
 
 	public EventVO() {

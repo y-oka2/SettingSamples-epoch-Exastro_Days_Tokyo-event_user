@@ -20,8 +20,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
@@ -50,21 +48,8 @@ public class EventRepository extends BaseRepository {
 		try {
 			
 			logger.debug("restTemplate.getForEntity [apiUrl: " + apiUrl + "]");
-			ResponseEntity<EventVO[]> response = restTemplate.getForEntity(apiUrl, EventVO[].class);
+			resBody = restTemplate.getForObject(apiUrl, EventVO[].class);
 			
-			if(response == null) {
-				logger.debug("null");
-				return null;
-			}
-			if(response.getStatusCode() != HttpStatus.OK) {
-				logger.debug("not 200");
-				return null;
-			}
-			if(!response.hasBody()) {
-				logger.debug("no data");
-				return null;
-			}
-			resBody = response.getBody();
 			return Arrays.asList(resBody);
 		}
 		catch(Exception e) {

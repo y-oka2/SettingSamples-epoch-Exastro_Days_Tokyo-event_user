@@ -1,19 +1,15 @@
 package exastro.Exastro_Days_Tokyo.event_user.service;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -23,41 +19,25 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exastro.Exastro_Days_Tokyo.event_user.repository.EventRepository;
-import exastro.Exastro_Days_Tokyo.event_user.repository.config.ConnectionConfig;
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.EventVO;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class EventRepositoryTest {
 	
 	private MockRestServiceServer mockServer;
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	@Mock   // モックオブジェクトとして使用することを宣言
+	@Autowired
 	protected RestTemplate restTemplate;
 	
-	@Mock   // モックオブジェクトとして使用することを宣言
-	protected ConnectionConfig connectionConfig;
-	
-	@InjectMocks    // モックオブジェクトの注入
+	@Autowired
 	private EventRepository eventRepository;
-	
-	@BeforeEach
-	public void setup() {
-		
-		when(connectionConfig.buildBaseUri()).thenReturn("http://localhost:8080");
-//		when(connectionConfig.getProtocol()).thenReturn("http");
-//		when(connectionConfig.getHost()).thenReturn("localhost");
-//		when(connectionConfig.getPort()).thenReturn("8080");
-		
-		mockServer = MockRestServiceServer.bindTo(restTemplate).build();
-//		mockServer = MockRestServiceServer.createServer(restTemplate);
-	}
 	
 	@Test
 	public void test_getEvent() throws JsonProcessingException {
 		// Mock設定
+		mockServer = MockRestServiceServer.createServer(restTemplate);
 		mockServer.expect(requestTo("http://localhost:8080" + "/api/v1/event"))
-//		mockServer.expect(requestTo(Mockito.anyString()))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(mapper.writeValueAsString(getEventMock0()), MediaType.APPLICATION_JSON));
 		
@@ -68,8 +48,9 @@ public class EventRepositoryTest {
 		assertThat(eventList.isEmpty());
 		
 		// Mock設定２
+		mockServer = MockRestServiceServer.createServer(restTemplate);
 		mockServer.expect(requestTo("http://localhost:8080" + "/api/v1/event"))
-				.andRespond(withSuccess(mapper.writeValueAsString(getEventMock3()), MediaType.APPLICATION_JSON));
+				.andRespond(withSuccess(getEventMock3_json(), MediaType.APPLICATION_JSON));
 		
 		// 対象メソッド実行
 		eventList = eventRepository.getEvent();
@@ -100,13 +81,13 @@ public class EventRepositoryTest {
 		return testData;
 	}
 	
-	private EventVO[] getEventMock3() {
+	private String getEventMock3_json() {
 		
-		EventVO item1 = new EventVO(1, "test_event_1", Timestamp.valueOf("2021-01-02 03:04:05"));
-		EventVO item2 = new EventVO(2, "test_event_2", Timestamp.valueOf("2021-12-31 23:59:59"));
-		EventVO item3 = new EventVO(3, "test_event_3", Timestamp.valueOf("2021-01-01 01:01:01"));
+		String item1 = "{\"event_id\": 1, \"event_name\": \"test_event_1\", \"event_date\": \"2021-01-02 03:04:05\"}";
+		String item2 = "{\"event_id\": 2, \"event_name\": \"test_event_2\", \"event_date\": \"2021-12-31 23:59:59\"}";
+		String item3 = "{\"event_id\": 3, \"event_name\": \"test_event_3\", \"event_date\": \"2021-01-01 01:01:01\"}";
 		
-		EventVO[] testData = {item1, item2, item3};
+		String testData = "[" + item1 + "," + item2 + "," + item3 + "]";
 		
 		return testData;
 	}
