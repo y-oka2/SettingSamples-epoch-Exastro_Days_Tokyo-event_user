@@ -15,6 +15,7 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.repository;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,12 +57,27 @@ public class EventRepository extends BaseRepository {
 			logger.debug(e.getMessage(), e);
 			throw e;
 		}
-		
-		
 	}
 	
 	public EventDetailVO getEventDetail(int eventId) {
-		return null;
+		
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		
+		String apiPath = MessageFormat.format("/api/v1/event/{0}", eventId);
+		String apiUrl = connectionConfig.buildBaseUri() + apiPath;
+		
+		EventDetailVO resBody = null;
+		try {
+			
+			logger.debug("restTemplate.getForEntity [apiUrl: " + apiUrl + "]");
+			resBody = restTemplate.getForObject(apiUrl, EventDetailVO.class);
+			
+			return resBody;
+		}
+		catch(Exception e) {
+			logger.debug(e.getMessage(), e);
+			throw e;
+		}
 	}
 
 }

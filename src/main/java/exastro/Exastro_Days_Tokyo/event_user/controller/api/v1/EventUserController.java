@@ -18,10 +18,15 @@ package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form.EventDetailForm;
+import exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form.EventTimetableForm;
 import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDetailDto;
 
+@RestController
+@RequestMapping("/api/v1/event")
 public class EventUserController extends BaseEventController {
 	
 	public EventUserController() {
@@ -35,13 +40,30 @@ public class EventUserController extends BaseEventController {
 		
 		try {
 			EventDetailDto eventDetailDto = service.getEventDetail(event_id);
-			eventDetail = new EventDetailForm();
+			eventDetail = new EventDetailForm(eventDetailDto.getEventId(), eventDetailDto.getEventName(),
+					eventDetailDto.getEventOverview(), eventDetailDto.getEventDate(), eventDetailDto.getEventVenue(),
+					eventDetailDto.getSpeakerIDs());
 		}
 		catch(Exception e) {
 			throw e;
 		}
 		
 		return eventDetail;
+	}
+	
+	@GetMapping("/{event_id}/timetable")
+	public EventTimetableForm eventTimetable(@PathVariable(value = "event_id") @Validated int event_id) {
+		
+		EventTimetableForm eventTimetableData = null;
+		
+		try {
+			EventDetailDto eventDetailDto = service.getEventDetail(event_id);
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		
+		return eventTimetableData;
 	}
 
 }

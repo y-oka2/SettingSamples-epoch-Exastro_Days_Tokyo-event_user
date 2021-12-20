@@ -13,49 +13,42 @@
  *   limitations under the License.
  */
 
-package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1;
-
-import java.util.List;
-import java.util.stream.Collectors;
+package exastro.Exastro_Days_Tokyo.event_user.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Service;
 
-import exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form.EventForm;
-import exastro.Exastro_Days_Tokyo.event_user.service.EventService;
+import exastro.Exastro_Days_Tokyo.event_user.repository.ParticipantRepository;
+import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDetailDto;
 
-public class BaseEventController {
+@Service
+public class ParticipantUserService implements ParticipantService {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	protected EventService service;
+	protected ParticipantRepository repository;
 	
-	public BaseEventController() {
+	public ParticipantUserService() {
 		
 	}
-	
-	@GetMapping("")
-	public List<EventForm> event() {
+
+	public EventDetailDto getEventDetail(int event_id) {
 
 		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		
-		List<EventForm> eventList = null;
+		EventDetailDto eventDetail = null;
 		
 		try {
-			eventList = service.getEvent()
-					.stream()
-					.map(e -> new EventForm(e.getEventId(), e.getEventName(), e.getEventDate()))
-					.collect(Collectors.toList());
+			repository.getParticipant();
 		}
 		catch(Exception e) {
-			logger.debug(e.getMessage());
 			throw e;
 		}
 		
-		return eventList;
+		return eventDetail;
 	}
 
 }

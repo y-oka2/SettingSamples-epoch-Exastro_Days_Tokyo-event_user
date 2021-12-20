@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import exastro.Exastro_Days_Tokyo.event_user.repository.EventRepository;
-import exastro.Exastro_Days_Tokyo.event_user.repository.ParticipantRepository;
 import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDto;
 
 public abstract class BaseEventService {
@@ -31,10 +30,7 @@ public abstract class BaseEventService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	protected EventRepository event_repo;
-
-	@Autowired
-	protected ParticipantRepository participant_repo;
+	protected EventRepository repository;
 	
 	public BaseEventService() {
 		
@@ -47,7 +43,7 @@ public abstract class BaseEventService {
 		List<EventDto> eventList = null;
 		
 		try {
-			eventList = event_repo.getEvent()
+			eventList = repository.getEvent()
 					.stream()
 					.map(e -> new EventDto(e.getEventId(), e.getEventName(), e.getEventDate()))
 					.collect(Collectors.toList());

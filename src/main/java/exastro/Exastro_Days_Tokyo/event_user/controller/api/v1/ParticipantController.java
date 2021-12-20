@@ -22,18 +22,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form.EventForm;
 import exastro.Exastro_Days_Tokyo.event_user.service.EventService;
 
-public class BaseEventController {
+@RestController
+@RequestMapping("/api/v1/participant")
+public class ParticipantController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	protected EventService service;
 	
-	public BaseEventController() {
+	public ParticipantController() {
 		
 	}
 	

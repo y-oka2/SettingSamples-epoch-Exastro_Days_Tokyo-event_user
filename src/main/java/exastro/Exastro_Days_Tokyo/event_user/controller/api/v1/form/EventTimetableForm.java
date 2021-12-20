@@ -16,9 +16,7 @@
 package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form;
 
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,16 +25,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventForm {
+public class EventTimetableForm {
 	
-	@JsonProperty("event_id")
 	private int eventId;
 	
-	@JsonProperty("event_name")
 	private String eventName;
 	
-	@JsonProperty("event_date")
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Tokyo") // 起動オプションでTimeZone変える？
+	private String eventOverview;
+	
 	private Date eventDate;
-
+	
+	private String eventVenue;
+	
+	private boolean deleteFlag;
+	
+	private List<Integer> speakerIDs;
 }

@@ -45,9 +45,19 @@ public class EventDetailDto {
 	
 	@Getter
 	@Setter
-	private boolean deleteFlag;
-	
-	@Getter
-	@Setter
 	private List<Integer> speakerIDs;
+	
+	public EventDetailDto() {
+		
+	}
+	
+	public EventDetailDto(int eventId, String eventName, String eventOverview, Date eventDate, String eventVenue,
+							List<Integer> speakerIDs) {
+		this.eventId = eventId;
+		this.eventName = eventName;
+		this.eventOverview = eventOverview;
+		this.eventDate = eventDate;
+		this.eventVenue = eventVenue;
+		this.speakerIDs = speakerIDs;
+	}
 }

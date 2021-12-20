@@ -15,20 +15,38 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import exastro.Exastro_Days_Tokyo.event_user.repository.vo.EventDetailVO;
 import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDetailDto;
 
 @Service
 public class EventUserService extends BaseEventService implements EventService {
+	
+	@Autowired
+	private ParticipantService participantService;
 	
 	public EventUserService() {
 		
 	}
 
 	public EventDetailDto getEventDetail(int event_id) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		
+		EventDetailDto eventDetail = null;
+		
+		try {
+			EventDetailVO edvo = repository.getEventDetail(event_id);
+			eventDetail = new EventDetailDto(edvo.getEventId(), edvo.getEventName(), edvo.getEventOverview(),
+					edvo.getEventDate(), edvo.getEventVenue(), edvo.getSpeakerIDs());
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		
+		return eventDetail;
 	}
 
 }
