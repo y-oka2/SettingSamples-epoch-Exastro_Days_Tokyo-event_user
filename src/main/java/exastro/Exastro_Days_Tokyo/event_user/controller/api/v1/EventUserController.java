@@ -45,6 +45,7 @@ public class EventUserController extends BaseEventController {
 					eventDetailDto.getSpeakerIDs());
 		}
 		catch(Exception e) {
+			logger.debug(e.getMessage(), e);
 			throw e;
 		}
 		
@@ -60,6 +61,7 @@ public class EventUserController extends BaseEventController {
 			EventDetailDto eventDetailDto = service.getEventDetail(event_id);
 		}
 		catch(Exception e) {
+			logger.debug(e.getMessage(), e);
 			throw e;
 		}
 		

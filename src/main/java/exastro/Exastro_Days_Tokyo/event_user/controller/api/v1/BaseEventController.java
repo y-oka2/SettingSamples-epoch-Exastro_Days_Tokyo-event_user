@@ -51,7 +51,7 @@ public class BaseEventController {
 					.collect(Collectors.toList());
 		}
 		catch(Exception e) {
-			logger.debug(e.getMessage());
+			logger.debug(e.getMessage(), e);
 			throw e;
 		}
 		
