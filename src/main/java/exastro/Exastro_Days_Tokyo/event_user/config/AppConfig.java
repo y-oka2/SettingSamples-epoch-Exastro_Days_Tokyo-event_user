@@ -31,24 +31,24 @@ public class AppConfig {
 	public RestTemplate restTemplate() {
 		RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
 		return restTemplateBuilder.build();
-   	}
+	}
 	
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-	  PropertySourcesPlaceholderConfigurer config = new PropertySourcesPlaceholderConfigurer();
-	  config.setIgnoreUnresolvablePlaceholders(true);
-	  return config;
+		PropertySourcesPlaceholderConfigurer config = new PropertySourcesPlaceholderConfigurer();
+		config.setIgnoreUnresolvablePlaceholders(true);
+		return config;
 	}
-
-    @Bean
-    @ConfigurationProperties(prefix = "resource.event")
-    public ConnectionConfig configEvent() {
-        return new ConnectionConfig();
-    }
-
-    @Bean
-    @ConfigurationProperties(prefix = "resource.participant")
-    public ConnectionConfig configParticipant() {
-        return new ConnectionConfig();
-    }
+	
+	@Bean
+	@ConfigurationProperties(prefix = "resource.event")
+	public ConnectionConfig configEvent() {
+		return new ConnectionConfig();
+	}
+	
+	@Bean
+	@ConfigurationProperties(prefix = "resource.participant")
+	public ConnectionConfig configParticipant() {
+		return new ConnectionConfig();
+	}
 }

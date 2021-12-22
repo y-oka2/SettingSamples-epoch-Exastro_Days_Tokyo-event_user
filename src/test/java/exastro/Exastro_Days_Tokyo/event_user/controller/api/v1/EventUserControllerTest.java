@@ -1,3 +1,18 @@
+/*   Copyright 2021 NEC Corporation
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
 package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1;
 
 import static org.hamcrest.Matchers.*;
@@ -5,19 +20,20 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -25,8 +41,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import exastro.Exastro_Days_Tokyo.event_user.service.EventService;
 import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDto;
 
-@ExtendWith(MockitoExtension.class)
-@WebMvcTest(EventUserController.class)
+@ExtendWith(SpringExtension.class)
 public class EventUserControllerTest {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -93,12 +108,15 @@ public class EventUserControllerTest {
 		return testData;
 	}
 	
-	private List<EventDto> getEventMock3() {
+	private List<EventDto> getEventMock3() throws ParseException {
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 		
 		List<EventDto> testData = new ArrayList<>();
-		EventDto item1 = new EventDto(1, "test_event_1", Timestamp.valueOf("2021-01-02 03:04:05"));
-		EventDto item2 = new EventDto(2, "test_event_2", Timestamp.valueOf("2021-12-31 23:59:59"));
-		EventDto item3 = new EventDto(3, "test_event_3", Timestamp.valueOf("2021-01-01 01:01:01"));
+		EventDto item1 = new EventDto(1, "test_event_1", dateFormat.parse("2021-01-02 03:04:05"));
+		EventDto item2 = new EventDto(2, "test_event_2", dateFormat.parse("2021-12-31 23:59:59"));
+		EventDto item3 = new EventDto(3, "test_event_3", dateFormat.parse("2021-01-01 01:01:01"));
 		
 		testData.add(item1);
 		testData.add(item2);

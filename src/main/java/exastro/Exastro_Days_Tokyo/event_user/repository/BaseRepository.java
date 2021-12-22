@@ -23,7 +23,7 @@ import exastro.Exastro_Days_Tokyo.event_user.repository.config.ConnectionConfig;
 
 public abstract class BaseRepository {
 	
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	protected RestTemplate restTemplate;
 	

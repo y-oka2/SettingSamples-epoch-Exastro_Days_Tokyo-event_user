@@ -17,14 +17,23 @@ package exastro.Exastro_Days_Tokyo.event_user.repository;
 
 import java.util.List;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
+import exastro.Exastro_Days_Tokyo.event_user.repository.config.ConnectionConfig;
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.ParticipantVO;
 
-@ConfigurationProperties(prefix = "resource.participant")
 @Repository
 public class ParticipantRepository extends BaseRepository {
+	
+	@Autowired
+	public ParticipantRepository(@Qualifier("configParticipant") ConnectionConfig connectionConfig,
+			RestTemplate restTemplate) {
+		this.connectionConfig = connectionConfig;
+		this.restTemplate = restTemplate;
+	}
 
 	public List<ParticipantVO> getParticipant() {
 		// TODO 自動生成されたメソッド・スタブ

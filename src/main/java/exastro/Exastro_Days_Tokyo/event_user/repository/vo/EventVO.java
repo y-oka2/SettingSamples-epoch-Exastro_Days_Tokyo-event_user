@@ -19,37 +19,24 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class EventVO {
 	
-	@Getter
-	@Setter
-	@JsonProperty("event_id")
 	private int eventId;
 	
-	@Getter
-	@Setter
-	@JsonProperty("event_name")
 	private String eventName;
 	
-	@Getter
-	@Setter
-	@JsonProperty("event_date")
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Tokyo") // 起動オプションでTimeZone変える？
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date eventDate;
-
-	public EventVO() {
-		
-	}
-
-	public EventVO(int eventId, String eventName,Date eventDate) {
-		this.eventId = eventId;
-		this.eventName = eventName;
-		this.eventDate = eventDate;
-	}
 }

@@ -1,11 +1,28 @@
+/*   Copyright 2021 NEC Corporation
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
 package exastro.Exastro_Days_Tokyo.event_user.repository;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
-import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +50,7 @@ public class EventRepositoryTest {
 	private EventRepository eventRepository;
 	
 	@Test
-	public void test_getEvent() throws JsonProcessingException {
+	public void test_getEvent() throws JsonProcessingException, ParseException {
 		// Mock設定
 		mockServer = MockRestServiceServer.createServer(restTemplate);
 		mockServer.expect(requestTo("http://localhost:8080" + "/api/v1/event"))
@@ -55,19 +72,22 @@ public class EventRepositoryTest {
 		eventList = eventRepository.getEvent();
 		
 		// 以下、結果確認
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+		
 		assertThat(eventList).hasSize(3);
 		
 		assertThat(eventList.get(0)).hasFieldOrPropertyWithValue("eventId", 1);
 		assertThat(eventList.get(0)).hasFieldOrPropertyWithValue("eventName", "test_event_1");
-		assertThat(eventList.get(0)).hasFieldOrPropertyWithValue("eventDate", Timestamp.valueOf("2021-01-02 03:04:05"));
+		assertThat(eventList.get(0)).hasFieldOrPropertyWithValue("eventDate", dateFormat.parse("2021-01-02 03:04:05"));
 		
 		assertThat(eventList.get(1)).hasFieldOrPropertyWithValue("eventId", 2);
 		assertThat(eventList.get(1)).hasFieldOrPropertyWithValue("eventName", "test_event_2");
-		assertThat(eventList.get(1)).hasFieldOrPropertyWithValue("eventDate", Timestamp.valueOf("2021-12-31 23:59:59"));
+		assertThat(eventList.get(1)).hasFieldOrPropertyWithValue("eventDate", dateFormat.parse("2021-12-31 23:59:59"));
 		
 		assertThat(eventList.get(2)).hasFieldOrPropertyWithValue("eventId", 3);
 		assertThat(eventList.get(2)).hasFieldOrPropertyWithValue("eventName", "test_event_3");
-		assertThat(eventList.get(2)).hasFieldOrPropertyWithValue("eventDate", Timestamp.valueOf("2021-01-01 01:01:01"));
+		assertThat(eventList.get(2)).hasFieldOrPropertyWithValue("eventDate", dateFormat.parse("2021-01-01 01:01:01"));
 		
 		mockServer.verify();
 	}

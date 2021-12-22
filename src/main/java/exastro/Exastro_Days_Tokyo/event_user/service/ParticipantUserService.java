@@ -26,7 +26,7 @@ import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDetailDto;
 @Service
 public class ParticipantUserService implements ParticipantService {
 	
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	protected ParticipantRepository repository;

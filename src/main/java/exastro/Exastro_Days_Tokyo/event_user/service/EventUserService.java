@@ -15,7 +15,6 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.EventDetailVO;
@@ -24,8 +23,8 @@ import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDetailDto;
 @Service
 public class EventUserService extends BaseEventService implements EventService {
 	
-	@Autowired
-	private ParticipantService participantService;
+//	@Autowired
+//	private ParticipantService participantService;
 	
 	public EventUserService() {
 		
