@@ -102,9 +102,9 @@ public class EventRepositoryTest {
 	
 	private String getEventMock3_json() {
 		
-		String item1 = "{\"event_id\": 1, \"event_name\": \"test_event_1\", \"event_date\": \"2021-01-02 03:04:05\"}";
-		String item2 = "{\"event_id\": 2, \"event_name\": \"test_event_2\", \"event_date\": \"2021-12-31 23:59:59\"}";
-		String item3 = "{\"event_id\": 3, \"event_name\": \"test_event_3\", \"event_date\": \"2021-01-01 01:01:01\"}";
+		String item1 = "{\"event_id\": 1, \"event_name\": \"test_event_1\", \"event_date\": \"2021-01-02T03:04:05.000Z\"}";
+		String item2 = "{\"event_id\": 2, \"event_name\": \"test_event_2\", \"event_date\": \"2021-12-31T23:59:59.000Z\"}";
+		String item3 = "{\"event_id\": 3, \"event_name\": \"test_event_3\", \"event_date\": \"2021-01-01T01:01:01.000Z\"}";
 		
 		String testData = "[" + item1 + "," + item2 + "," + item3 + "]";
 		

@@ -34,8 +34,8 @@ public class EventForm {
 	private int eventId;
 	
 	private String eventName;
-	
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 	private Date eventDate;
 
 }

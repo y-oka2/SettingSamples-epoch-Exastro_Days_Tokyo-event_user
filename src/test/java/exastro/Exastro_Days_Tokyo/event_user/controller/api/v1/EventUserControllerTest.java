@@ -85,15 +85,15 @@ public class EventUserControllerTest {
 				
 				.andExpect(jsonPath("$[0].event_id").value(1))
 				.andExpect(jsonPath("$[0].event_name").value("test_event_1"))
-				.andExpect(jsonPath("$[0].event_date").value("2021-01-02 03:04:05"))
+				.andExpect(jsonPath("$[0].event_date").value("2021-01-02T03:04:05.000Z"))
 				
 				.andExpect(jsonPath("$[1].event_id").value(2))
 				.andExpect(jsonPath("$[1].event_name").value("test_event_2"))
-				.andExpect(jsonPath("$[1].event_date").value("2021-12-31 23:59:59"))
+				.andExpect(jsonPath("$[1].event_date").value("2021-12-31T23:59:59.000Z"))
 				
 				.andExpect(jsonPath("$[2].event_id").value(3))
 				.andExpect(jsonPath("$[2].event_name").value("test_event_3"))
-				.andExpect(jsonPath("$[2].event_date").value("2021-01-01 01:01:01"))
+				.andExpect(jsonPath("$[2].event_date").value("2021-01-01T01:01:01.000Z"))
 				.andReturn();
 		
 		logger.info("external response : {}", mvcResult.getResponse().getContentAsString());
