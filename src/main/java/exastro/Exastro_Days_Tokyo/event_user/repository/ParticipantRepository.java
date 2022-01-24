@@ -15,12 +15,14 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import exastro.Exastro_Days_Tokyo.event_user.repository.config.ConnectionConfig;
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.ParticipantVO;
@@ -34,10 +36,95 @@ public class ParticipantRepository extends BaseRepository {
 		this.connectionConfig = connectionConfig;
 		this.restTemplate = restTemplate;
 	}
+	
+//	// セミナー参加人数確認
+//	public long countParicipant(int seminarId) {
+//		
+//		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+//		
+//		String apiPath = "/api/v1/participant/count?seminarId={seminarId}";
+//		String apiUrl = connectionConfig.buildBaseUri() + apiPath;
+//		
+//		try {
+//			long count = null; 
+//			logger.debug("restTemplate.getForEntity [apiUrl: " + apiUrl + "], [seminarId: " + seminarId + "]");
+//			resBody = restTemplate.getForObject(apiUrl, count, seminarId);
+//			
+//			return resBody;
+//		}
+//		catch(Exception e) {
+//			throw e;
+//		}
+//	}
+	
+	// 申込済みセミナー確認
+	public List<ParticipantVO> getParticipant(String userId, String kindOfSso){
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		
+		String apiPath = "/api/v1/participant";
+		String apiUrl = connectionConfig.buildBaseUri() + apiPath;
+		
+		ParticipantVO[] resBody = null;
+		try {
+			
+			logger.debug("restTemplate.getForEntity [apiUrl: " + apiUrl + "]");
+			UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiUrl);
+			
+			builder.queryParam("userId", userId, "kindOfSso", kindOfSso);
+			
+			String uri = builder.toUriString();
+			
+			resBody = restTemplate.getForObject(uri, ParticipantVO[].class);
+			
+			return Arrays.asList(resBody);
+		}
+		catch(Exception e) {
+			throw e;
+		}
+	}
 
-	public List<ParticipantVO> getParticipant() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	// 参加者登録
+	public void saveParticipant(ParticipantVO participantVo) {
+		
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		
+		String apiPath = "/api/v1/participant";
+		String apiUrl = connectionConfig.buildBaseUri() + apiPath;
+		
+		try {
+			
+			logger.debug("restTemplate.postForEntity [apiUrl: " + apiUrl + "]");
+			restTemplate.postForObject(apiUrl, participantVo, ParticipantVO.class);
+
+		}
+		catch(Exception e) {
+			throw e;
+		}
+	}
+	
+	// 参加者登録解除
+	public void deleteParticipant(String userId, String kindOfSso, int seminarId) {
+		
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		
+		String apiPath = "/api/v1/participant";
+		String apiUrl = connectionConfig.buildBaseUri() + apiPath;
+		
+		try {
+			
+			logger.debug("restTemplate.postForEntity [apiUrl: " + apiUrl + "]");
+			UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiUrl);
+			
+			builder.queryParam("userId", userId, "kindOfSso", kindOfSso);
+			
+			String uri = builder.toUriString();
+			
+			restTemplate.delete(uri, userId, kindOfSso, seminarId);
+
+		}
+		catch(Exception e) {
+			throw e;
+		}
 	}
 
 }

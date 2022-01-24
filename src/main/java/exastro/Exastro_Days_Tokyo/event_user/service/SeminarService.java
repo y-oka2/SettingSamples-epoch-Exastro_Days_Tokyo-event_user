@@ -19,17 +19,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import exastro.Exastro_Days_Tokyo.event_user.service.dto.ParticipantDto;
+import exastro.Exastro_Days_Tokyo.event_user.service.dto.SeminarDetailDto;
+import exastro.Exastro_Days_Tokyo.event_user.service.dto.SeminarDto;
 
 @Service
-public interface ParticipantService {
+public interface SeminarService {
 
-//	public long countParticipant(int seminarId);
-	
-	public List<ParticipantDto> getParticipant(String userId, String kindOfSso);
-	
-	public void saveParticipant(ParticipantDto participantDto);
-	
-	public void deleteParticipant(String userId, String kindOfSso, int seminarId);
+	public List<SeminarDto> getSeminar(int eventId);
 
+	public SeminarDetailDto getSeminarDetail(int seminarId);
 }

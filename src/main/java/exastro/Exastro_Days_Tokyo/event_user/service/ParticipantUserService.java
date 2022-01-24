@@ -15,40 +15,80 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.service;
 
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import exastro.Exastro_Days_Tokyo.event_user.repository.ParticipantRepository;
-import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDetailDto;
+import exastro.Exastro_Days_Tokyo.event_user.repository.vo.ParticipantVO;
+import exastro.Exastro_Days_Tokyo.event_user.service.dto.ParticipantDto;
 
 @Service
-public class ParticipantUserService implements ParticipantService {
+public class ParticipantUserService extends BaseParticipantService implements ParticipantService {
 	
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	protected ParticipantRepository repository;
+
+//	//セミナー参加人数確認
+//	public long countParticipant(int seminarId) {
+//		
+//		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+//		
+//		try{
+//			//セミナー参加人数を取得しリターン
+//			long count = repository.countParticipant(seminarId);
+//			return count;
+//		}
+//		catch(Exception e) {
+//			throw e;
+//		}	
+//	}
 	
-	public ParticipantUserService() {
+	//申込済みセミナー確認
+	public List<ParticipantDto> getParticipant(String userId, String kindOfSso){
 		
-	}
-
-	public EventDetailDto getEventDetail(int event_id) {
-
 		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		
-		EventDetailDto eventDetail = null;
+		List<ParticipantDto> participantList = null;
 		
-		try {
-			repository.getParticipant();
+		try{
+			
+			participantList = repository.getParticipant(userId, kindOfSso)
+					.stream()
+					.map(p -> new ParticipantDto(p.getSeminarId(), p.getParticipantId(), p.getUserId(), p.getUserName(),
+							p.getKindOfSso(), p.getRegisteredDate(), p.isDeleteFlag()))
+					.collect(Collectors.toList());			
 		}
 		catch(Exception e) {
 			throw e;
 		}
+		return participantList;
+	}
+	
+	//参加者登録
+	public void saveParticipant(ParticipantDto participantDto) {
 		
-		return eventDetail;
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		
+		ParticipantVO participantVo = null;
+		
+		try {
+			//DtoからEntityインスタンスを作成しDBにinsert
+			participantVo = new ParticipantVO(participantDto.getSeminarId(),
+					participantDto.getUserId(), participantDto.getUserName(), participantDto.getKindOfSso(),
+					new Timestamp(participantDto.getRegisteredDate().getTime()));
+			repository.saveParticipant(participantVo);
+		}
+		catch(Exception e) {
+			throw e;
+		}
 	}
 
 }

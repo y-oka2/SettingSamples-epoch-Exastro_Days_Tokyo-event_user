@@ -15,40 +15,43 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form.EventDetailForm;
-import exastro.Exastro_Days_Tokyo.event_user.service.dto.EventDetailDto;
+import exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form.SeminarDetailForm;
+import exastro.Exastro_Days_Tokyo.event_user.service.SeminarUserService;
+import exastro.Exastro_Days_Tokyo.event_user.service.dto.SeminarDetailDto;
 
 @RestController
-@RequestMapping("/api/v1/event")
-public class EventUserController extends BaseEventController {
+@RequestMapping("/api/v1/seminar")
+public class SeminarUserController extends BaseSeminarController {
 	
-	public EventUserController() {
-		
+	public SeminarUserController(@Autowired SeminarUserService service) {
+		this.service = service;
 	}
 	
-	@GetMapping("/{event_id}")
-	public EventDetailForm eventDetail(@PathVariable(value = "event_id") @Validated int event_id) {
+	@GetMapping("/{seminarId}")
+	public SeminarDetailForm seminarDetail(@PathVariable(value = "seminarId") @Validated int seminarId) {
 		
-		EventDetailForm eventDetail = null;
+		//logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		
+		SeminarDetailForm seminarDetail = null;
+
 		try {
-			EventDetailDto eventDetailDto = service.getEventDetail(event_id);
-			eventDetail = new EventDetailForm(eventDetailDto.getEventId(), eventDetailDto.getEventName(),
-					eventDetailDto.getEventOverview(), eventDetailDto.getEventDate(), eventDetailDto.getEventVenue(),
-					eventDetailDto.getSpeakerIDs());
+			SeminarDetailDto e = service.getSeminarDetail(seminarId);
+			seminarDetail = new SeminarDetailForm(e.getSeminarId(), e.getSeminarName(), e.getBlockId(), e.getBlockName(),
+					 e.getStartDatetime(), e.getSpeakerId(), e.getSeminarOverview(), e.getCapacity());		
 		}
 		catch(Exception e) {
 			logger.debug(e.getMessage(), e);
 			throw e;
 		}
 		
-		return eventDetail;
+		return seminarDetail;
 	}
 
 }

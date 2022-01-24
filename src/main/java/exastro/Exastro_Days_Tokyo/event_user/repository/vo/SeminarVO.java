@@ -15,39 +15,38 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.repository.vo;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ParticipantVO {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class SeminarVO {
 
+//	セミナーID	
 	private int seminarId;
-	private int participantId;
-	private String userId;
-	private String userName;
-	private String kindOfSso;
-	private Timestamp registeredDate;
-	private boolean deleteFlag;
+
+//	セミナー名
+	private String seminarName;
 	
-	public ParticipantVO(String userId, String kindOfSso) {
-		this.userId = userId;
-		this.kindOfSso = kindOfSso;
-	}
+//	ブロックID
+	private int blockId;
+
+//	ブロック名	
+	private String blockName;
+
+//	開催日時(開始)
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+	private Date startDatetime;
 	
-	//参加者登録用コンストラクタ
-	public ParticipantVO(int seminarId, String userId, String userName, String kindOfSso,
-			Timestamp registeredDate) {
-		this.seminarId = seminarId;
-		this.userId = userId;
-		this.userName = userName;
-		this.kindOfSso = kindOfSso;
-		this.registeredDate = registeredDate;
-		this.deleteFlag = false;
-	}
 }
