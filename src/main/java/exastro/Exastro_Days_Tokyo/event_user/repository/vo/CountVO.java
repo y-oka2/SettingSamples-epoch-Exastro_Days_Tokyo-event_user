@@ -13,23 +13,23 @@
  *   limitations under the License.
  */
 
-package exastro.Exastro_Days_Tokyo.event_user.service;
+package exastro.Exastro_Days_Tokyo.event_user.repository.vo;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-import org.springframework.stereotype.Service;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import exastro.Exastro_Days_Tokyo.event_user.service.dto.ParticipantDto;
-
-@Service
-public interface ParticipantService {
-
-	public long countParticipant(int seminarId);
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class CountVO {
 	
-	public List<ParticipantDto> getParticipant(String userId, String kindOfSso);
+	private long count;
 	
-	public void saveParticipant(ParticipantDto participantDto);
-	
-	public void deleteParticipant(String userId, String kindOfSso, int seminarId);
-
 }

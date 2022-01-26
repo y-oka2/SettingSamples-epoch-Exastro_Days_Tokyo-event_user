@@ -37,23 +37,24 @@ public class ParticipantController extends BaseParticipantController{
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-//	//セミナー参加人数確認
-//	@GetMapping(value = "/count",
-//			produces = MediaType.APPLICATION_JSON_VALUE )
-//	public long getParticipant(@RequestParam ("seminar_id") int seminarId) {
-//		
-//		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
-//		
-//		try{
-//			//セミナー参加人数を取得しリターン
-//			long count = service.countParticipant(seminarId);
-//			return count;
-//		}
-//		catch(Exception e) {
-//			logger.debug(e.getMessage(), e);
-//			throw e;
-//		}
-//	}
+	//セミナー参加人数確認
+	@GetMapping(value = "/count",
+			produces = MediaType.APPLICATION_JSON_VALUE )
+	public long getParticipant(@RequestParam ("seminar_id") int seminarId) {
+		
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		Long count = null; 
+		
+		try{
+			//セミナー参加人数を取得しリターン
+			count = service.countParticipant(seminarId);
+			return count;
+		}
+		catch(Exception e) {
+			logger.debug(e.getMessage(), e);
+			throw e;
+		}
+	}
 	
 	//申込済みセミナー確認
 	@GetMapping(value = "",

@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import exastro.Exastro_Days_Tokyo.event_user.repository.ParticipantRepository;
+import exastro.Exastro_Days_Tokyo.event_user.repository.vo.CountVO;
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.ParticipantVO;
 import exastro.Exastro_Days_Tokyo.event_user.service.dto.ParticipantDto;
 
@@ -36,20 +37,22 @@ public class ParticipantUserService extends BaseParticipantService implements Pa
 	@Autowired
 	protected ParticipantRepository repository;
 
-//	//セミナー参加人数確認
-//	public long countParticipant(int seminarId) {
-//		
-//		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
-//		
-//		try{
-//			//セミナー参加人数を取得しリターン
-//			long count = repository.countParticipant(seminarId);
-//			return count;
-//		}
-//		catch(Exception e) {
-//			throw e;
-//		}	
-//	}
+	//セミナー参加人数確認
+	public long countParticipant(int seminarId) {
+		
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		Long count = null;
+		
+		try{
+			//セミナー参加人数を取得しリターン
+			CountVO countVo = repository.countParticipant(seminarId);
+			count = countVo.getCount();
+			return count;
+		}
+		catch(Exception e) {
+			throw e;
+		}	
+	}
 	
 	//申込済みセミナー確認
 	public List<ParticipantDto> getParticipant(String userId, String kindOfSso){

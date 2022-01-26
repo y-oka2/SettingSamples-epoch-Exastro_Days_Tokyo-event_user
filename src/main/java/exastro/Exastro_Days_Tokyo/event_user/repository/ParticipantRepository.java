@@ -25,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import exastro.Exastro_Days_Tokyo.event_user.repository.config.ConnectionConfig;
+import exastro.Exastro_Days_Tokyo.event_user.repository.vo.CountVO;
 import exastro.Exastro_Days_Tokyo.event_user.repository.vo.ParticipantVO;
 
 @Repository
@@ -37,25 +38,32 @@ public class ParticipantRepository extends BaseRepository {
 		this.restTemplate = restTemplate;
 	}
 	
-//	// セミナー参加人数確認
-//	public long countParicipant(int seminarId) {
-//		
-//		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
-//		
-//		String apiPath = "/api/v1/participant/count?seminarId={seminarId}";
-//		String apiUrl = connectionConfig.buildBaseUri() + apiPath;
-//		
-//		try {
-//			long count = null; 
-//			logger.debug("restTemplate.getForEntity [apiUrl: " + apiUrl + "], [seminarId: " + seminarId + "]");
-//			resBody = restTemplate.getForObject(apiUrl, count, seminarId);
-//			
-//			return resBody;
-//		}
-//		catch(Exception e) {
-//			throw e;
-//		}
-//	}
+	// セミナー参加人数確認
+	public CountVO countParticipant(int seminarId) {
+		
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		
+		String apiPath = "/api/v1/participant/count";
+		String apiUrl = connectionConfig.buildBaseUri() + apiPath;
+		
+		CountVO resBody= null;
+		try {
+		
+			logger.debug("restTemplate.getForEntity [apiUrl: " + apiUrl + "], [seminarId: " + seminarId + "]");
+			UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiUrl);
+			
+			builder.queryParam("seminar_id", seminarId);
+			
+			String uri = builder.toUriString();
+			
+			resBody = restTemplate.getForObject(uri, CountVO.class);
+			
+			return resBody;
+		}
+		catch(Exception e) {
+			throw e;
+		}
+	}
 	
 	// 申込済みセミナー確認
 	public List<ParticipantVO> getParticipant(String userId, String kindOfSso){
@@ -70,7 +78,8 @@ public class ParticipantRepository extends BaseRepository {
 			logger.debug("restTemplate.getForEntity [apiUrl: " + apiUrl + "]");
 			UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiUrl);
 			
-			builder.queryParam("userId", userId, "kindOfSso", kindOfSso);
+			builder.queryParam("user_id", userId)
+				.queryParam("kind_of_sso", kindOfSso);
 			
 			String uri = builder.toUriString();
 			
@@ -115,7 +124,9 @@ public class ParticipantRepository extends BaseRepository {
 			logger.debug("restTemplate.postForEntity [apiUrl: " + apiUrl + "]");
 			UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiUrl);
 			
-			builder.queryParam("userId", userId, "kindOfSso", kindOfSso);
+			builder.queryParam("user_id", userId)
+				.queryParam("kind_of_sso", kindOfSso)
+				.queryParam("seminar_id", seminarId);
 			
 			String uri = builder.toUriString();
 			
