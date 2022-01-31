@@ -30,14 +30,14 @@ public class EventUserService extends BaseEventService implements EventService {
 		
 	}
 
-	public EventDetailDto getEventDetail(int event_id) {
+	public EventDetailDto getEventDetail(int eventId) {
 
 		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		
 		EventDetailDto eventDetail = null;
 		
 		try {
-			EventDetailVO edvo = repository.getEventDetail(event_id);
+			EventDetailVO edvo = repository.getEventDetail(eventId);
 			eventDetail = new EventDetailDto(edvo.getEventId(), edvo.getEventName(), edvo.getEventOverview(),
 					edvo.getEventDate(), edvo.getEventVenue(), edvo.getSpeakerIDs());
 		}

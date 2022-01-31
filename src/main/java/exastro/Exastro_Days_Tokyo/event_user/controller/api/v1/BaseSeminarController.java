@@ -39,7 +39,7 @@ public class BaseSeminarController {
 	}
 	
 	@GetMapping("")
-	public List<SeminarForm> seminar(@RequestParam(name = "eventId", required = true) int eventId) {
+	public List<SeminarForm> seminar(@RequestParam(name = "event_id", required = true) int eventId) {
 
 		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		

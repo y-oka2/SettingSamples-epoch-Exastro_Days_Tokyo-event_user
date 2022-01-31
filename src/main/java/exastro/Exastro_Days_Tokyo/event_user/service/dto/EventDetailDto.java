@@ -18,46 +18,19 @@ package exastro.Exastro_Days_Tokyo.event_user.service.dto;
 import java.util.Date;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EventDetailDto {
 	
-	@Getter
-	@Setter
 	private int eventId;
-	
-	@Getter
-	@Setter
 	private String eventName;
-	
-	@Getter
-	@Setter
 	private String eventOverview;
-	
-	@Getter
-	@Setter
 	private Date eventDate;
-	
-	@Getter
-	@Setter
 	private String eventVenue;
-	
-	@Getter
-	@Setter
 	private List<Integer> speakerIDs;
-	
-	public EventDetailDto() {
-		
-	}
-	
-	public EventDetailDto(int eventId, String eventName, String eventOverview, Date eventDate, String eventVenue,
-							List<Integer> speakerIDs) {
-		this.eventId = eventId;
-		this.eventName = eventName;
-		this.eventOverview = eventOverview;
-		this.eventDate = eventDate;
-		this.eventVenue = eventVenue;
-		this.speakerIDs = speakerIDs;
-	}
 }

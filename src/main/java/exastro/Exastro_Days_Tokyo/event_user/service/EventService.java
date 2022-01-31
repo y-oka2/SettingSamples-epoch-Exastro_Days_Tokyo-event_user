@@ -27,5 +27,5 @@ public interface EventService {
 
 	public List<EventDto> getEvent();
 
-	public EventDetailDto getEventDetail(int event_id);
+	public EventDetailDto getEventDetail(int eventId);
 }

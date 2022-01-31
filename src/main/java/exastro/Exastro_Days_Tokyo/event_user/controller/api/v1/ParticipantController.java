@@ -40,7 +40,7 @@ public class ParticipantController extends BaseParticipantController{
 	//セミナー参加人数確認
 	@GetMapping(value = "/count",
 			produces = MediaType.APPLICATION_JSON_VALUE )
-	public long getParticipant(@RequestParam ("seminar_id") int seminarId) {
+	public long countParticipant(@RequestParam ("seminar_id") int seminarId) {
 		
 		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		Long count = null; 

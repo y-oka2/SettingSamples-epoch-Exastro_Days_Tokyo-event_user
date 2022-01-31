@@ -17,48 +17,30 @@ package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1.form;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SeminarDetailForm extends SeminarForm{
 
 //	登壇者ID
-	private int speakerId;
+	private Integer speakerId;
 	
 //	セミナー概要
 	private String seminarOverview;
 
 //	定員
-	private int capacity;
+	private Integer capacity;
 	
 	public SeminarDetailForm(int seminarId, String seminarName, int blockId, String blockName, Date startDatetime ,
-			int speakerId, String seminarOverview, int capacity){
+			Integer speakerId, String seminarOverview, Integer capacity){
 		super(seminarId, seminarName, blockId, blockName, startDatetime);
 		this.speakerId = speakerId;
 		this.seminarOverview = seminarOverview;
 		this.capacity = capacity;
-	}
-
-	public int getSpeakerId() {
-		return speakerId;
-	}
-
-	public void setSpeakerId(int speakerId) {
-		this.speakerId = speakerId;
-	}
-
-	public String getSeminarOverview() {
-		return seminarOverview;
-	}
-
-	public void setSeminarOverview(String seminarOverview) {
-		this.seminarOverview = seminarOverview;
-	}
-
-	public int getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
-	
+	}	
 }
 

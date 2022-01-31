@@ -46,12 +46,12 @@ public class SeminarDetailVO {
 	private Date startDatetime;
 	
 //	登壇者ID
-	private int speakerId;
+	private Integer speakerId;
 	
 //	セミナー概要
 	private String seminarOverview;
 
 //	定員
-	private int capacity;
+	private Integer capacity;
 	
 }

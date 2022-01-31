@@ -48,46 +48,19 @@ public class SeminarForm {
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 	private Date startDatetime;
 	
-
-	public int getSeminarId() {
-		return seminarId;
-	}
-
-	public void setSeminarId(int seminarId) {
+//	セミナー参加済みフラグ
+	private boolean isParticipated;
+	
+//	定員オーバーフラグ
+	private boolean isCapacityOver;
+	
+	public SeminarForm(int seminarId, String seminarName, int blockId, String blockName, Date startDatetime) {
 		this.seminarId = seminarId;
-	}
-
-	public String getSeminarName() {
-		return seminarName;
-	}
-
-	public void setSeminarName(String seminarName) {
 		this.seminarName = seminarName;
-	}
-
-	public int getBlockId() {
-		return blockId;
-	}
-
-	public void setBlockId(int blockId) {
 		this.blockId = blockId;
-	}
-
-	public String getBlockName() {
-		return blockName;
-	}
-
-	public void setBlockName(String blockName) {
 		this.blockName = blockName;
-	}
-
-	public Date getStartDatetime() {
-		return startDatetime;
-	}
-
-	public void setStartDatetime(Date startDatetime) {
 		this.startDatetime = startDatetime;
+		this.isParticipated = false;
+		this.isCapacityOver = false;
 	}
-	
-	
 }
