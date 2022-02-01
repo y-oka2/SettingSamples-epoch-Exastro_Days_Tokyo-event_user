@@ -30,6 +30,6 @@ import lombok.NoArgsConstructor;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CountVO {
 	
-	private long count;
+	private Integer count;
 	
 }

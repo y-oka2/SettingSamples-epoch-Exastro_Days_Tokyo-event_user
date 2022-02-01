@@ -40,6 +40,8 @@ public class EventUserController extends BaseEventController {
 	@GetMapping("/{eventId}")
 	public EventDetailForm eventDetail(@PathVariable(value = "eventId") @Validated int eventId) {
 		
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
+		
 		EventDetailForm eventDetail = null;
 		
 		try {
@@ -58,7 +60,9 @@ public class EventUserController extends BaseEventController {
 	
 	@GetMapping("/{eventId}/timetable")
 	public List<SeminarForm> eventTimetable(@PathVariable(value = "eventId") @Validated int eventId,
-			@RequestParam ("user_id") String userId, @RequestParam ("kind_of_sso") String kindOfSso, @RequestParam ("seminar_id") int seminarId) {
+			@RequestParam (name = "user_id", defaultValue = "") String userId, @RequestParam (name = "kind_of_sso", defaultValue = "") String kindOfSso) {
+		
+		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
 		
 		List<SeminarForm> seminarList = null;
 		List<ParticipantForm> participantList = null;
@@ -78,30 +82,28 @@ public class EventUserController extends BaseEventController {
 					.collect(Collectors.toList());
 			
 			// 申込済みのセミナーかどうか判定
-			for (SeminarForm list : seminarList) {
-				for (ParticipantForm list2 : participantList) {
-					if (String.valueOf(list.getSeminarId()).contains(String.valueOf(list2.getSeminarId()))){
-						list.setParticipated(true);
+			for (SeminarForm seminar : seminarList) {
+				for (ParticipantForm participant : participantList) {
+					if (String.valueOf(seminar.getSeminarId()).contains(String.valueOf(participant.getSeminarId()))){
+						seminar.setParticipated(true);
 					}
 				}
 			}
 			
 			// セミナーが定員上限に達しているか判定
-			for (SeminarForm list : seminarList) {
+			for (SeminarForm seminar : seminarList) {
 				
 				// セミナーの定員を取得
-				Integer capacity =  seminarService.getSeminarDetail(list.getSeminarId()).getCapacity();
+				Integer capacity =  seminarService.getSeminarDetail(seminar.getSeminarId()).getCapacity();
 				// セミナー参加人数を取得
-				long countParticipant = participantService.countParticipant(list.getSeminarId());
+				Integer countParticipant = participantService.countParticipant(seminar.getSeminarId());
 				
 				if (capacity == null) {
-					list.setCapacityOver(false);
+					seminar.setCapacityOver(false);
 				}else if (countParticipant >= capacity) {
-					System.out.println(capacity);
-					list.setCapacityOver(true);	
+					seminar.setCapacityOver(true);	
 				}
 			}
-			System.out.println(seminarList);
 		}
 		catch(Exception e) {
 			logger.debug(e.getMessage(), e);

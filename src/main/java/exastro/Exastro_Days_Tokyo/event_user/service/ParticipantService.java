@@ -24,7 +24,7 @@ import exastro.Exastro_Days_Tokyo.event_user.service.dto.ParticipantDto;
 @Service
 public interface ParticipantService {
 
-	public long countParticipant(int seminarId);
+	public Integer countParticipant(int seminarId);
 	
 	public List<ParticipantDto> getParticipant(String userId, String kindOfSso);
 	
