@@ -15,6 +15,7 @@
 
 package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,7 @@ public class ParticipantController extends BaseParticipantController{
 	public long countParticipant(@RequestParam ("seminar_id") int seminarId) {
 		
 		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
-		Long count = null; 
+		Integer count = null;
 		
 		try{
 			//セミナー参加人数を取得しリターン
@@ -92,11 +93,11 @@ public class ParticipantController extends BaseParticipantController{
 		ParticipantDto participantDto = null;
 		
 		try{
-			
+			Date registerdDate = new Date(); // now
 			//FormからDtoインスタンスを作成
 			participantDto = new ParticipantDto(participantForm.getSeminarId(),
 					participantForm.getUserId(), participantForm.getUserName(), participantForm.getKindOfSso(),
-					participantForm.getRegisteredDate());
+					registerdDate);
 			service.saveParticipant(participantDto);
 		}
 		catch(Exception e) {

@@ -55,12 +55,11 @@ public class ParticipantForm {
 	
 	
 	// 参加者登録用コンストラクタ
-	public ParticipantForm(int seminarId, String userId, String userName, String kindOfSso, Date registeredDate) {
+	public ParticipantForm(int seminarId, String userId, String userName, String kindOfSso) {
 		this.seminarId = seminarId;
 		this.userId = userId;
 		this.userName = userName;
 		this.kindOfSso = kindOfSso;
-		this.registeredDate = registeredDate;
 	}
 	
 	// 参加者登録解除用コンストラクタ

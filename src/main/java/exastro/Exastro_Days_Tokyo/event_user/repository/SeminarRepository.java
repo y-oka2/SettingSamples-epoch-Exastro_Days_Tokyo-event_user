@@ -52,7 +52,7 @@ public class SeminarRepository extends BaseRepository {
 //			resBody = restTemplate.getForObject(apiUrl, SeminarVO[].class, eventId);
 			UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(apiUrl);
 			
-			builder.queryParam("eventId", eventId);
+			builder.queryParam("event_id", eventId);
 			
 			String uri = builder.toUriString();
 			
