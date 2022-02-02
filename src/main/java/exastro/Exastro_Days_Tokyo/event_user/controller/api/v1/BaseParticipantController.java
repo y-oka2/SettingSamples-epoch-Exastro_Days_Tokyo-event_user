@@ -18,9 +18,11 @@ package exastro.Exastro_Days_Tokyo.event_user.controller.api.v1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import exastro.Exastro_Days_Tokyo.event_user.service.ParticipantService;
 
@@ -35,6 +37,7 @@ public class BaseParticipantController {
 	@DeleteMapping(
 				value = "",
 				produces = MediaType.APPLICATION_JSON_VALUE )
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteParticipant(@RequestParam("user_id") String userId, @RequestParam("kind_of_sso") String kindOfSso, @RequestParam("seminar_id") int seminarId) {
 		
 		logger.debug("method called. [ " + Thread.currentThread().getStackTrace()[1].getMethodName() + " ]");
